@@ -44,12 +44,18 @@ export default function Checkout() {
 
   async function handleCheckout() {
     const order = {
-      cart: cartFormatted,
+      cart: cartFormatted.map((product) => {
+        return {
+          productId: product.id,
+          quantity: product.amount
+        };
+      }),
       total,
       status: 'pending',
       createdAt: new Date(),
       observations
     };
+
 
     // Salvar no localStorage
     localStorage.setItem('checkoutOrder', JSON.stringify(order));
