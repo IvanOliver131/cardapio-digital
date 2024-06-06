@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "label": "Porções"
+  },
+  {
+    "id": 2,
+    "label": "Massas"
+  },
+  {
+    "id": 3,
+    "label": "Combos"
+  },
+  {
+    "id": 4,
+    "label": "Veganos"
+  },
+  {
+    "id": 5,
+    "label": "Carnes"
+  }
+]
