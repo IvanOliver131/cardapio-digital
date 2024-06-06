@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import cardapio from 'data/cardapio.json';
 import styles from './Checkout.module.scss';
 import { toast } from 'react-toastify';
+import { api } from 'services/api';
 
 export default function Checkout() {
   const { cart, removeProduct, updateProductAmount, clearCart } = useCart();
@@ -41,17 +42,19 @@ export default function Checkout() {
     removeProduct(productId);
   }
 
-  function handleCheckout() {
+  async function handleCheckout() {
     const order = {
       cart: cartFormatted,
       total,
       status: 'pending',
-      createdAt: Date.now(),
+      createdAt: new Date(),
       observations
     };
 
     // Salvar no localStorage
     localStorage.setItem('checkoutOrder', JSON.stringify(order));
+
+    await api.post('/orders', order);
 
     // Atualizar estoque no JSON
     const updatedStock = cardapio.map((item) => {
